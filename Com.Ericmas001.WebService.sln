@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.WebService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.WebService.Tests", "Com.Ericmas001.WebService.Tests\Com.Ericmas001.WebService.Tests.csproj", "{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonCrawler", "PokemonCrawler\PokemonCrawler.csproj", "{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
