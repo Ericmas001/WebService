@@ -13,70 +13,70 @@
                     Id = 1,
                     Name="Bulbasaur",
                     Type = "Grass / Poison",
-                    Photo = "http://cdn.bulbagarden.net/upload/e/ec/001MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png"
                 },
                 new Pokemon
                 {
                     Id = 4,
                     Name="Charmander",
                     Type = "Fire",
-                    Photo = "http://cdn.bulbagarden.net/upload/b/bb/004MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png"
                 },
                 new Pokemon
                 {
                     Id = 7,
                     Name="Squirtle",
                     Type = "Water",
-                    Photo = "http://cdn.bulbagarden.net/upload/9/92/007MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png"
                 },
                 new Pokemon
                 {
                     Id = 10,
                     Name="Caterpie",
                     Type = "Bug",
-                    Photo = "http://cdn.bulbagarden.net/upload/6/69/010MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/5/5d/010Caterpie.png/250px-010Caterpie.png"
                 },
                 new Pokemon
                 {
                     Id = 25,
                     Name="Pikachu",
                     Type = "Electric",
-                    Photo = "http://cdn.bulbagarden.net/upload/0/0f/025MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png"
                 },
                 new Pokemon
                 {
                     Id = 43,
                     Name="Oddish",
                     Type = "Grass / Poison",
-                    Photo = "http://cdn.bulbagarden.net/upload/a/a5/043MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/4/43/043Oddish.png/250px-043Oddish.png"
                 },
                 new Pokemon
                 {
                     Id = 52,
                     Name="Meowth",
                     Type = "Normal",
-                    Photo = "http://cdn.bulbagarden.net/upload/5/50/052MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/d/d6/052Meowth.png/250px-052Meowth.png"
                 },
                 new Pokemon
                 {
                     Id = 54,
                     Name="Psyduck",
                     Type = "Water",
-                    Photo = "http://cdn.bulbagarden.net/upload/6/6b/054MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/5/53/054Psyduck.png/250px-054Psyduck.png"
                 },
                 new Pokemon
                 {
                     Id = 129,
                     Name="Magikarp",
                     Type = "Water",
-                    Photo = "http://cdn.bulbagarden.net/upload/7/7c/129MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/0/02/129Magikarp.png/250px-129Magikarp.png"
                 },
                 new Pokemon
                 {
-                    Id = 142,
+                    Id = 143,
                     Name="Snorlax",
                     Type = "Normal",
-                    Photo = "http://cdn.bulbagarden.net/upload/d/d6/143MS.png"
+                    Photo = "http://cdn.bulbagarden.net/upload/thumb/f/fb/143Snorlax.png/250px-143Snorlax.png"
                 }};
     }
 }
