@@ -12,31 +12,5 @@ namespace Com.Ericmas001.WebService.OmgPokedex.DbAccess
         public string Type { get; set; }
         public string Photo { get; set; }
         public string Generation { get; set; }
-
-        public void AddToDatabase()
-        {
-            try
-            {
-
-            using (var context = new OmgPokedexEntities())
-            {
-                var ps = new PokemonSummaryEntity
-                {
-                    PokedexNo = Id,
-                    Name = Name,
-                    Type = Type,
-                    Generation = Generation,
-                    ImageUrl = Photo
-                };
-                context.AllPokemonSummaries.Add(ps);
-                context.SaveChanges();
-            }
-
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
     }
 }

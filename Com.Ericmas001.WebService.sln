@@ -11,34 +11,45 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonCrawler", "PokemonCr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.WebService.OmgPokedex.DbAccess", "Com.Ericmas001.WebService.OmgPokedex.DbAccess\Com.Ericmas001.WebService.OmgPokedex.DbAccess.csproj", "{403F5688-865A-46A7-B2F7-BA0A4FDAD651}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonStorer", "PokemonStorer\PokemonStorer.csproj", "{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Com.Ericmas001.WebService.OmgPokedex.DbImport", "Com.Ericmas001.WebService.OmgPokedex.DbImport\Com.Ericmas001.WebService.OmgPokedex.DbImport.dtproj", "{921CDB2B-848E-448A-83E7-BC6B717E0C95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Debug|Any CPU.ActiveCfg = Development
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Debug|Any CPU.Build.0 = Development
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Development|Any CPU.ActiveCfg = Development
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Development|Any CPU.Build.0 = Development
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Release|Any CPU.ActiveCfg = Development
+		{921CDB2B-848E-448A-83E7-BC6B717E0C95}.Release|Any CPU.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
