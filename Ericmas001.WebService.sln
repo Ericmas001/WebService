@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ericmas001.WebService", "Ericmas001.WebService\Ericmas001.WebService.csproj", "{97421E00-0A93-439C-8489-6ABD4CDC3CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ericmas001.WebService.Tests", "Ericmas001.WebService.Tests\Ericmas001.WebService.Tests.csproj", "{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmgPokedex.DbAccess", "OmgPokedex.DbAccess\OmgPokedex.DbAccess.csproj", "{403F5688-865A-46A7-B2F7-BA0A4FDAD651}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "OmgPokedex.DbImport", "OmgPokedex.DbImport\OmgPokedex.DbImport.dtproj", "{4507197E-E414-4570-86FD-824073220041}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97421E00-0A93-439C-8489-6ABD4CDC3CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40CB5692-DC4F-440E-AD0E-F847E6F73CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4507197E-E414-4570-86FD-824073220041}.Debug|Any CPU.ActiveCfg = Development
+		{4507197E-E414-4570-86FD-824073220041}.Debug|Any CPU.Build.0 = Development
+		{4507197E-E414-4570-86FD-824073220041}.Development|Any CPU.ActiveCfg = Development
+		{4507197E-E414-4570-86FD-824073220041}.Development|Any CPU.Build.0 = Development
+		{4507197E-E414-4570-86FD-824073220041}.Release|Any CPU.ActiveCfg = Development
+		{4507197E-E414-4570-86FD-824073220041}.Release|Any CPU.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
