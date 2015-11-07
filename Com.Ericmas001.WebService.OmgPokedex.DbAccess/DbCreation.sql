@@ -100,7 +100,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [ericmas001].[TUsers](
 	[IdUser] [int] IDENTITY(1,1) NOT NULL,
-	[Username] [nvarchar](100) NOT NULL,
+	[Username] [nvarchar](100) UNIQUE NOT NULL,
 	[Password] [nvarchar](100) NOT NULL,
 	[Email] [nvarchar](200) NULL,
 	[SessionId] [nvarchar](100) NULL,
