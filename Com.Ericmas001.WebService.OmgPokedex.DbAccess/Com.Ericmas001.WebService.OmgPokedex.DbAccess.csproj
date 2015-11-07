@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backpack.cs">
+    <Compile Include="BackpackEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="CatchedPokemon.cs">
+    <Compile Include="CatchedPokemonEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
@@ -74,14 +74,14 @@
       <DependentUpon>OmgPokedexEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Pokemon.cs" />
-    <Compile Include="PokemonSummary.cs">
+    <Compile Include="PokemonSummaryEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trainer.cs">
+    <Compile Include="TrainerEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="UserEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -97,6 +97,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AllPokemonSummaries.sql" />
+    <Content Include="DbCreation.sql" />
     <Content Include="OmgPokedexEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OmgPokedexEntities.edmx</DependentUpon>

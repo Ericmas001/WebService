@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBackpacks">
           <Key>
             <PropertyRef Name="IdBackPack" />
@@ -29,8 +29,8 @@
           <Property Name="IdPokemonSummary" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PokedexNo" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Generation" Type="nvarchar" MaxLength="10" />
-          <Property Name="Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Generation" Type="nvarchar" MaxLength="100" />
+          <Property Name="Type" Type="nvarchar" MaxLength="500" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TTrainers">
@@ -123,12 +123,11 @@
             <End Role="TTrainers" EntitySet="TTrainers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Backpack">
+        <EntityType Name="BackpackEntity">
           <Key>
             <PropertyRef Name="IdBackPack" />
           </Key>
@@ -138,7 +137,7 @@
           <NavigationProperty Name="Trainer" Relationship="Self.FK_TBackpacks_TTrainers" FromRole="TBackpacks" ToRole="TTrainers" />
           <NavigationProperty Name="CatchedPokemonsOfBackpack" Relationship="Self.FK_TCatchedPokemon_TBackpacks" FromRole="TBackpacks" ToRole="TCatchedPokemon" />
         </EntityType>
-        <EntityType Name="CatchedPokemon">
+        <EntityType Name="CatchedPokemonEntity">
           <Key>
             <PropertyRef Name="IdCatchedPokemon" />
           </Key>
@@ -149,19 +148,19 @@
           <NavigationProperty Name="Backpack" Relationship="Self.FK_TCatchedPokemon_TBackpacks" FromRole="TCatchedPokemon" ToRole="TBackpacks" />
           <NavigationProperty Name="PokemonSummary" Relationship="Self.FK_TCatchedPokemon_TPokemonSummaries" FromRole="TCatchedPokemon" ToRole="TPokemonSummaries" />
         </EntityType>
-        <EntityType Name="PokemonSummary">
+        <EntityType Name="PokemonSummaryEntity">
           <Key>
             <PropertyRef Name="IdPokemonSummary" />
           </Key>
           <Property Name="IdPokemonSummary" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PokedexNo" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Generation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Generation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CatchedPokemonsOfPokemonSummary" Relationship="Self.FK_TCatchedPokemon_TPokemonSummaries" FromRole="TPokemonSummaries" ToRole="TCatchedPokemon" />
         </EntityType>
-        <EntityType Name="Trainer">
+        <EntityType Name="TrainerEntity">
           <Key>
             <PropertyRef Name="IdTrainer" />
           </Key>
@@ -171,7 +170,7 @@
           <NavigationProperty Name="BackpacksOfTrainer" Relationship="Self.FK_TBackpacks_TTrainers" FromRole="TTrainers" ToRole="TBackpacks" />
           <NavigationProperty Name="User" Relationship="Self.FK_TTrainers_TUsers" FromRole="TTrainers" ToRole="TUsers" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserEntity">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
@@ -184,8 +183,8 @@
           <NavigationProperty Name="TrainersOfUser" Relationship="Self.FK_TTrainers_TUsers" FromRole="TUsers" ToRole="TTrainers" />
         </EntityType>
         <Association Name="FK_TBackpacks_TTrainers">
-          <End Role="TTrainers" Type="Model.Trainer" Multiplicity="1" />
-          <End Role="TBackpacks" Type="Model.Backpack" Multiplicity="*" />
+          <End Role="TTrainers" Type="Model.TrainerEntity" Multiplicity="1" />
+          <End Role="TBackpacks" Type="Model.BackpackEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TTrainers">
               <PropertyRef Name="IdTrainer" />
@@ -196,8 +195,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TCatchedPokemon_TBackpacks">
-          <End Role="TBackpacks" Type="Model.Backpack" Multiplicity="1" />
-          <End Role="TCatchedPokemon" Type="Model.CatchedPokemon" Multiplicity="*" />
+          <End Role="TBackpacks" Type="Model.BackpackEntity" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Model.CatchedPokemonEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBackpacks">
               <PropertyRef Name="IdBackPack" />
@@ -208,8 +207,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TCatchedPokemon_TPokemonSummaries">
-          <End Role="TPokemonSummaries" Type="Model.PokemonSummary" Multiplicity="1" />
-          <End Role="TCatchedPokemon" Type="Model.CatchedPokemon" Multiplicity="*" />
+          <End Role="TPokemonSummaries" Type="Model.PokemonSummaryEntity" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Model.CatchedPokemonEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TPokemonSummaries">
               <PropertyRef Name="IdPokemonSummary" />
@@ -220,8 +219,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TTrainers_TUsers">
-          <End Role="TUsers" Type="Model.User" Multiplicity="1" />
-          <End Role="TTrainers" Type="Model.Trainer" Multiplicity="*" />
+          <End Role="TUsers" Type="Model.UserEntity" Multiplicity="1" />
+          <End Role="TTrainers" Type="Model.TrainerEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TUsers">
               <PropertyRef Name="IdUser" />
@@ -232,11 +231,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OmgPokedexEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AllBackPacks" EntityType="Model.Backpack" />
-          <EntitySet Name="AllCatchedPokemons" EntityType="Model.CatchedPokemon" />
-          <EntitySet Name="AllPokemonSummaries" EntityType="Model.PokemonSummary" />
-          <EntitySet Name="AllTrainers" EntityType="Model.Trainer" />
-          <EntitySet Name="AllUsers" EntityType="Model.User" />
+          <EntitySet Name="AllBackPacks" EntityType="Model.BackpackEntity" />
+          <EntitySet Name="AllCatchedPokemons" EntityType="Model.CatchedPokemonEntity" />
+          <EntitySet Name="AllPokemonSummaries" EntityType="Model.PokemonSummaryEntity" />
+          <EntitySet Name="AllTrainers" EntityType="Model.TrainerEntity" />
+          <EntitySet Name="AllUsers" EntityType="Model.UserEntity" />
           <AssociationSet Name="FK_TBackpacks_TTrainers" Association="Self.FK_TBackpacks_TTrainers">
             <End Role="TTrainers" EntitySet="AllTrainers" />
             <End Role="TBackpacks" EntitySet="AllBackPacks" />
@@ -261,7 +260,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="OmgPokedexEntities">
           <EntitySetMapping Name="AllBackPacks">
-            <EntityTypeMapping TypeName="Model.Backpack">
+            <EntityTypeMapping TypeName="Model.BackpackEntity">
               <MappingFragment StoreEntitySet="TBackpacks">
                 <ScalarProperty Name="IdBackPack" ColumnName="IdBackPack" />
                 <ScalarProperty Name="IdTrainer" ColumnName="IdTrainer" />
@@ -270,7 +269,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AllCatchedPokemons">
-            <EntityTypeMapping TypeName="Model.CatchedPokemon">
+            <EntityTypeMapping TypeName="Model.CatchedPokemonEntity">
               <MappingFragment StoreEntitySet="TCatchedPokemon">
                 <ScalarProperty Name="IdCatchedPokemon" ColumnName="IdCatchedPokemon" />
                 <ScalarProperty Name="IdBackpack" ColumnName="IdBackpack" />
@@ -280,7 +279,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AllPokemonSummaries">
-            <EntityTypeMapping TypeName="Model.PokemonSummary">
+            <EntityTypeMapping TypeName="Model.PokemonSummaryEntity">
               <MappingFragment StoreEntitySet="TPokemonSummaries">
                 <ScalarProperty Name="IdPokemonSummary" ColumnName="IdPokemonSummary" />
                 <ScalarProperty Name="PokedexNo" ColumnName="PokedexNo" />
@@ -292,7 +291,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AllTrainers">
-            <EntityTypeMapping TypeName="Model.Trainer">
+            <EntityTypeMapping TypeName="Model.TrainerEntity">
               <MappingFragment StoreEntitySet="TTrainers">
                 <ScalarProperty Name="IdTrainer" ColumnName="IdTrainer" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
@@ -301,7 +300,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AllUsers">
-            <EntityTypeMapping TypeName="Model.User">
+            <EntityTypeMapping TypeName="Model.UserEntity">
               <MappingFragment StoreEntitySet="TUsers">
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

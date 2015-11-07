@@ -25,10 +25,10 @@ namespace Com.Ericmas001.WebService.OmgPokedex.DbAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Backpack> AllBackPacks { get; set; }
-        public virtual DbSet<CatchedPokemon> AllCatchedPokemons { get; set; }
-        public virtual DbSet<PokemonSummary> AllPokemonSummaries { get; set; }
-        public virtual DbSet<Trainer> AllTrainers { get; set; }
-        public virtual DbSet<User> AllUsers { get; set; }
+        public virtual DbSet<BackpackEntity> AllBackPacks { get; set; }
+        public virtual DbSet<CatchedPokemonEntity> AllCatchedPokemons { get; set; }
+        public virtual DbSet<PokemonSummaryEntity> AllPokemonSummaries { get; set; }
+        public virtual DbSet<TrainerEntity> AllTrainers { get; set; }
+        public virtual DbSet<UserEntity> AllUsers { get; set; }
     }
 }

@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="45d4c5c7441241d9a8766366ac1c7c16" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Backpack" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CatchedPokemon" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PokemonSummary" Width="1.5" PointX="9.625" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Trainer" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BackpackEntity" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CatchedPokemonEntity" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PokemonSummaryEntity" Width="1.5" PointX="9.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TrainerEntity" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserEntity" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_TBackpacks_TTrainers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TCatchedPokemon_TBackpacks" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TCatchedPokemon_TPokemonSummaries" ManuallyRouted="false" />
