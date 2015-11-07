@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.WebService.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonCrawler", "PokemonCrawler\PokemonCrawler.csproj", "{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.WebService.OmgPokedex.DbAccess", "Com.Ericmas001.WebService.OmgPokedex.DbAccess\Com.Ericmas001.WebService.OmgPokedex.DbAccess.csproj", "{403F5688-865A-46A7-B2F7-BA0A4FDAD651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonStorer", "PokemonStorer\PokemonStorer.csproj", "{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A3FCBB-EFAE-4F69-BB4B-50BEC1DBA6E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403F5688-865A-46A7-B2F7-BA0A4FDAD651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB98DB0-6A0C-4946-AC0E-00C3B6916089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

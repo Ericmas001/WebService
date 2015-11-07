@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBackpacks">
+          <Key>
+            <PropertyRef Name="IdBackPack" />
+          </Key>
+          <Property Name="IdBackPack" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTrainer" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TCatchedPokemon">
+          <Key>
+            <PropertyRef Name="IdCatchedPokemon" />
+          </Key>
+          <Property Name="IdCatchedPokemon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBackpack" Type="int" Nullable="false" />
+          <Property Name="IdPokemonSummary" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TPokemonSummaries">
+          <Key>
+            <PropertyRef Name="IdPokemonSummary" />
+          </Key>
+          <Property Name="IdPokemonSummary" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PokedexNo" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Generation" Type="nvarchar" MaxLength="10" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="TTrainers">
+          <Key>
+            <PropertyRef Name="IdTrainer" />
+          </Key>
+          <Property Name="IdTrainer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TUsers">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="SessionId" Type="nvarchar" MaxLength="100" />
+          <Property Name="SessionValidUntil" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_TBackpacks_TTrainers">
+          <End Role="TTrainers" Type="Self.TTrainers" Multiplicity="1" />
+          <End Role="TBackpacks" Type="Self.TBackpacks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTrainers">
+              <PropertyRef Name="IdTrainer" />
+            </Principal>
+            <Dependent Role="TBackpacks">
+              <PropertyRef Name="IdTrainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCatchedPokemon_TBackpacks">
+          <End Role="TBackpacks" Type="Self.TBackpacks" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Self.TCatchedPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBackpacks">
+              <PropertyRef Name="IdBackPack" />
+            </Principal>
+            <Dependent Role="TCatchedPokemon">
+              <PropertyRef Name="IdBackpack" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCatchedPokemon_TPokemonSummaries">
+          <End Role="TPokemonSummaries" Type="Self.TPokemonSummaries" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Self.TCatchedPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPokemonSummaries">
+              <PropertyRef Name="IdPokemonSummary" />
+            </Principal>
+            <Dependent Role="TCatchedPokemon">
+              <PropertyRef Name="IdPokemonSummary" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTrainers_TUsers">
+          <End Role="TUsers" Type="Self.TUsers" Multiplicity="1" />
+          <End Role="TTrainers" Type="Self.TTrainers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUsers">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="TTrainers">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="TBackpacks" EntityType="Self.TBackpacks" Schema="ericmas001" store:Type="Tables" />
+          <EntitySet Name="TCatchedPokemon" EntityType="Self.TCatchedPokemon" Schema="ericmas001" store:Type="Tables" />
+          <EntitySet Name="TPokemonSummaries" EntityType="Self.TPokemonSummaries" Schema="ericmas001" store:Type="Tables" />
+          <EntitySet Name="TTrainers" EntityType="Self.TTrainers" Schema="ericmas001" store:Type="Tables" />
+          <EntitySet Name="TUsers" EntityType="Self.TUsers" Schema="ericmas001" store:Type="Tables" />
+          <AssociationSet Name="FK_TBackpacks_TTrainers" Association="Self.FK_TBackpacks_TTrainers">
+            <End Role="TTrainers" EntitySet="TTrainers" />
+            <End Role="TBackpacks" EntitySet="TBackpacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCatchedPokemon_TBackpacks" Association="Self.FK_TCatchedPokemon_TBackpacks">
+            <End Role="TBackpacks" EntitySet="TBackpacks" />
+            <End Role="TCatchedPokemon" EntitySet="TCatchedPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCatchedPokemon_TPokemonSummaries" Association="Self.FK_TCatchedPokemon_TPokemonSummaries">
+            <End Role="TPokemonSummaries" EntitySet="TPokemonSummaries" />
+            <End Role="TCatchedPokemon" EntitySet="TCatchedPokemon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTrainers_TUsers" Association="Self.FK_TTrainers_TUsers">
+            <End Role="TUsers" EntitySet="TUsers" />
+            <End Role="TTrainers" EntitySet="TTrainers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Backpack">
+          <Key>
+            <PropertyRef Name="IdBackPack" />
+          </Key>
+          <Property Name="IdBackPack" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTrainer" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK_TBackpacks_TTrainers" FromRole="TBackpacks" ToRole="TTrainers" />
+          <NavigationProperty Name="CatchedPokemonsOfBackpack" Relationship="Self.FK_TCatchedPokemon_TBackpacks" FromRole="TBackpacks" ToRole="TCatchedPokemon" />
+        </EntityType>
+        <EntityType Name="CatchedPokemon">
+          <Key>
+            <PropertyRef Name="IdCatchedPokemon" />
+          </Key>
+          <Property Name="IdCatchedPokemon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBackpack" Type="Int32" Nullable="false" />
+          <Property Name="IdPokemonSummary" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Backpack" Relationship="Self.FK_TCatchedPokemon_TBackpacks" FromRole="TCatchedPokemon" ToRole="TBackpacks" />
+          <NavigationProperty Name="PokemonSummary" Relationship="Self.FK_TCatchedPokemon_TPokemonSummaries" FromRole="TCatchedPokemon" ToRole="TPokemonSummaries" />
+        </EntityType>
+        <EntityType Name="PokemonSummary">
+          <Key>
+            <PropertyRef Name="IdPokemonSummary" />
+          </Key>
+          <Property Name="IdPokemonSummary" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PokedexNo" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Generation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CatchedPokemonsOfPokemonSummary" Relationship="Self.FK_TCatchedPokemon_TPokemonSummaries" FromRole="TPokemonSummaries" ToRole="TCatchedPokemon" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="IdTrainer" />
+          </Key>
+          <Property Name="IdTrainer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BackpacksOfTrainer" Relationship="Self.FK_TBackpacks_TTrainers" FromRole="TTrainers" ToRole="TBackpacks" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TTrainers_TUsers" FromRole="TTrainers" ToRole="TUsers" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SessionId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SessionValidUntil" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TrainersOfUser" Relationship="Self.FK_TTrainers_TUsers" FromRole="TUsers" ToRole="TTrainers" />
+        </EntityType>
+        <Association Name="FK_TBackpacks_TTrainers">
+          <End Role="TTrainers" Type="Model.Trainer" Multiplicity="1" />
+          <End Role="TBackpacks" Type="Model.Backpack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTrainers">
+              <PropertyRef Name="IdTrainer" />
+            </Principal>
+            <Dependent Role="TBackpacks">
+              <PropertyRef Name="IdTrainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCatchedPokemon_TBackpacks">
+          <End Role="TBackpacks" Type="Model.Backpack" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Model.CatchedPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBackpacks">
+              <PropertyRef Name="IdBackPack" />
+            </Principal>
+            <Dependent Role="TCatchedPokemon">
+              <PropertyRef Name="IdBackpack" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TCatchedPokemon_TPokemonSummaries">
+          <End Role="TPokemonSummaries" Type="Model.PokemonSummary" Multiplicity="1" />
+          <End Role="TCatchedPokemon" Type="Model.CatchedPokemon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPokemonSummaries">
+              <PropertyRef Name="IdPokemonSummary" />
+            </Principal>
+            <Dependent Role="TCatchedPokemon">
+              <PropertyRef Name="IdPokemonSummary" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTrainers_TUsers">
+          <End Role="TUsers" Type="Model.User" Multiplicity="1" />
+          <End Role="TTrainers" Type="Model.Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TUsers">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="TTrainers">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OmgPokedexEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AllBackPacks" EntityType="Model.Backpack" />
+          <EntitySet Name="AllCatchedPokemons" EntityType="Model.CatchedPokemon" />
+          <EntitySet Name="AllPokemonSummaries" EntityType="Model.PokemonSummary" />
+          <EntitySet Name="AllTrainers" EntityType="Model.Trainer" />
+          <EntitySet Name="AllUsers" EntityType="Model.User" />
+          <AssociationSet Name="FK_TBackpacks_TTrainers" Association="Self.FK_TBackpacks_TTrainers">
+            <End Role="TTrainers" EntitySet="AllTrainers" />
+            <End Role="TBackpacks" EntitySet="AllBackPacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCatchedPokemon_TBackpacks" Association="Self.FK_TCatchedPokemon_TBackpacks">
+            <End Role="TBackpacks" EntitySet="AllBackPacks" />
+            <End Role="TCatchedPokemon" EntitySet="AllCatchedPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TCatchedPokemon_TPokemonSummaries" Association="Self.FK_TCatchedPokemon_TPokemonSummaries">
+            <End Role="TPokemonSummaries" EntitySet="AllPokemonSummaries" />
+            <End Role="TCatchedPokemon" EntitySet="AllCatchedPokemons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTrainers_TUsers" Association="Self.FK_TTrainers_TUsers">
+            <End Role="TUsers" EntitySet="AllUsers" />
+            <End Role="TTrainers" EntitySet="AllTrainers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="OmgPokedexEntities">
+          <EntitySetMapping Name="AllBackPacks">
+            <EntityTypeMapping TypeName="Model.Backpack">
+              <MappingFragment StoreEntitySet="TBackpacks">
+                <ScalarProperty Name="IdBackPack" ColumnName="IdBackPack" />
+                <ScalarProperty Name="IdTrainer" ColumnName="IdTrainer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllCatchedPokemons">
+            <EntityTypeMapping TypeName="Model.CatchedPokemon">
+              <MappingFragment StoreEntitySet="TCatchedPokemon">
+                <ScalarProperty Name="IdCatchedPokemon" ColumnName="IdCatchedPokemon" />
+                <ScalarProperty Name="IdBackpack" ColumnName="IdBackpack" />
+                <ScalarProperty Name="IdPokemonSummary" ColumnName="IdPokemonSummary" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllPokemonSummaries">
+            <EntityTypeMapping TypeName="Model.PokemonSummary">
+              <MappingFragment StoreEntitySet="TPokemonSummaries">
+                <ScalarProperty Name="IdPokemonSummary" ColumnName="IdPokemonSummary" />
+                <ScalarProperty Name="PokedexNo" ColumnName="PokedexNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Generation" ColumnName="Generation" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllTrainers">
+            <EntityTypeMapping TypeName="Model.Trainer">
+              <MappingFragment StoreEntitySet="TTrainers">
+                <ScalarProperty Name="IdTrainer" ColumnName="IdTrainer" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllUsers">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="TUsers">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="SessionValidUntil" ColumnName="SessionValidUntil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
