@@ -72,7 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OmgPokedexEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Pokemon.cs" />
+    <Compile Include="Pokemons.cs" />
     <Compile Include="PokemonSummaryEntity.cs">
       <DependentUpon>OmgPokedexEntities.tt</DependentUpon>
     </Compile>
@@ -111,6 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OmgPokedex.DataTypes\OmgPokedex.DataTypes.csproj">
+      <Project>{0adb6b49-5bff-4c6a-98fd-db8be210c1a6}</Project>
+      <Name>OmgPokedex.DataTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

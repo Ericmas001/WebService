@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PokemonsControllerTest.cs" />
+    <Compile Include="DataAccess\PokemonDbMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
@@ -105,6 +107,10 @@
     <ProjectReference Include="..\Ericmas001.WebService\Ericmas001.WebService.csproj">
       <Project>{97421E00-0A93-439C-8489-6ABD4CDC3CED}</Project>
       <Name>Com.Ericmas001.WebService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OmgPokedex.DataTypes\OmgPokedex.DataTypes.csproj">
+      <Project>{0adb6b49-5bff-4c6a-98fd-db8be210c1a6}</Project>
+      <Name>OmgPokedex.DataTypes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

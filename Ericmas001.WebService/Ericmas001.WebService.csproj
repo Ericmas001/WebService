@@ -169,6 +169,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PokemonsController.cs" />
+    <Compile Include="DataAccess\IPokemonDb.cs" />
+    <Compile Include="DataAccess\PokemonDatabase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +228,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OmgPokedex.DataTypes\OmgPokedex.DataTypes.csproj">
+      <Project>{0adb6b49-5bff-4c6a-98fd-db8be210c1a6}</Project>
+      <Name>OmgPokedex.DataTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OmgPokedex.DbAccess\OmgPokedex.DbAccess.csproj">
       <Project>{403f5688-865a-46a7-b2f7-ba0a4fdad651}</Project>
       <Name>OmgPokedex.DbAccess</Name>

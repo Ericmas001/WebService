@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OmgPokedex.DataTypes;
+using OmgPokedex.DataTypes.BasicImplementations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,14 +8,8 @@ using System.Reflection;
 
 namespace OmgPokedex.DbAccess
 {
-    public class Pokemon
+    public static class Pokemons
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Photo { get; set; }
-        public string Generation { get; set; }
-
         public static IEnumerable<Pokemon> GetAllPokemons()
         {
             using (var context = new OmgPokedexEntities())

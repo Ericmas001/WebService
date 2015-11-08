@@ -1,28 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using static System.String;
+using Ericmas001.WebService.DataAccess;
+using System.Linq;
+using OmgPokedex.DataTypes;
 using OmgPokedex.DbAccess;
+using OmgPokedex.DataTypes.BasicImplementations;
 
 namespace Ericmas001.WebService.Controllers
 {
     public class PokemonsController : ApiController
     {
-        // GET api/pokemons
-        public IEnumerable<Pokemon> Get()
+        IPokemonDb m_Database;
+        public PokemonsController() : this(new PokemonDatabase())
         {
-            return Pokemon.GetAllPokemons();
+
+        }
+        public PokemonsController(IPokemonDb db) : base()
+        {
+            m_Database = db;
+        }
+
+        // GET api/pokemons
+        public IEnumerable<IPokemon> Get()
+        {
+            return m_Database.GetAllPokemons();
         }
 
         // GET api/pokemons/5
-        public Pokemon Get(int id)
+        public IPokemon Get(int id)
         {
-            return Pokemon.GetPokemon(id) ?? new Pokemon
-            {
-                Id = id,
-                Name = "Unknown",
-                Type = "Unknown",
-                Photo = Empty
-            };
+            return m_Database.GetPokemon(id) ?? new UnknownPokemon(id);
         }
 
         //// POST api/values

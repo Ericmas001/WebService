@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmgPokedex.DbAccess", "OmgP
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "OmgPokedex.DbImport", "OmgPokedex.DbImport\OmgPokedex.DbImport.dtproj", "{4507197E-E414-4570-86FD-824073220041}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmgPokedex.DataTypes", "OmgPokedex.DataTypes\OmgPokedex.DataTypes.csproj", "{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{4507197E-E414-4570-86FD-824073220041}.Development|Any CPU.Build.0 = Development
 		{4507197E-E414-4570-86FD-824073220041}.Release|Any CPU.ActiveCfg = Development
 		{4507197E-E414-4570-86FD-824073220041}.Release|Any CPU.Build.0 = Development
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADB6B49-5BFF-4C6A-98FD-DB8BE210C1A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
