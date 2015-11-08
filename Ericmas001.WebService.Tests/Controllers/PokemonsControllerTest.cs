@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ericmas001.WebService;
 using Ericmas001.WebService.Controllers;
 using Ericmas001.WebService.DataAccess;
 using Ericmas001.WebService.Tests.DataAccess;
@@ -29,11 +24,12 @@ namespace Ericmas001.WebService.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(POKEMONS.Length, result.Count());
-            foreach(var rp in result)
+            var pokemons = result as IPokemon[] ?? result.ToArray();
+            Assert.AreEqual(m_Pokemons.Length, pokemons.Length);
+            foreach(var rp in pokemons)
             {
                 Assert.IsNotNull(rp);
-                var p = POKEMONS.SingleOrDefault(x => x.Id == rp.Id);
+                var p = m_Pokemons.SingleOrDefault(x => x.Id == rp.Id);
                 Assert.IsNotNull(p);
                 ComparePokemon(p, rp);
             }
@@ -50,7 +46,7 @@ namespace Ericmas001.WebService.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            var p = POKEMONS.SingleOrDefault(x => x.Id == result.Id);
+            var p = m_Pokemons.SingleOrDefault(x => x.Id == result.Id);
             Assert.IsNotNull(p);
             ComparePokemon(p, result);
         }
@@ -66,7 +62,7 @@ namespace Ericmas001.WebService.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            var p = POKEMONS.SingleOrDefault(x => x.Id == result.Id);
+            var p = m_Pokemons.SingleOrDefault(x => x.Id == result.Id);
             Assert.IsNull(p);
             ComparePokemon(new UnknownPokemon(result.Id), result);
         }
@@ -106,15 +102,14 @@ namespace Ericmas001.WebService.Tests.Controllers
 
         //    // Assert
         //}
-        private static IPokemon[] POKEMONS = new[]
-            {
-                new Pokemon() {Id = 25, Name = "Pikachu", Generation = "Generation I", Type = "Electric", Photo = "http://www.pokemonimages.com/Pikachu.png"},
+        private static readonly IPokemon[] m_Pokemons = {
+                new Pokemon {Id = 25, Name = "Pikachu", Generation = "Generation I", Type = "Electric", Photo = "http://www.pokemonimages.com/Pikachu.png"},
                 new Pokemon() {Id = 152, Name = "Chikorita", Generation = "Generation II", Type = "Grass", Photo = "http://www.pikachu.com/Chikorita.png"}
             };
 
         private static IPokemonDb GetDbMock()
         {
-            return new PokemonDbMock(POKEMONS);
+            return new PokemonDbMock(m_Pokemons);
         }
 
         private void ComparePokemon(IPokemon expected, IPokemon result)

@@ -13,12 +13,14 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using Ericmas001.WebService.Areas.HelpPage.ModelDescriptions;
 using Ericmas001.WebService.Areas.HelpPage.Models;
+using Ericmas001.WebService.Areas.HelpPage.SampleGeneration;
 
 namespace Ericmas001.WebService.Areas.HelpPage
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class HelpPageConfigurationExtensions
     {
-        private const string ApiModelPrefix = "MS_HelpPageApiModel_";
+        private const string API_MODEL_PREFIX = "MS_HelpPageApiModel_";
 
         /// <summary>
         /// Sets the documentation provider for help page.
@@ -176,7 +178,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         /// </summary>
         /// <param name="config">The <see cref="HttpConfiguration"/>.</param>
         /// <returns>The help page sample generator.</returns>
-        public static HelpPageSampleGenerator GetHelpPageSampleGenerator(this HttpConfiguration config)
+        private static HelpPageSampleGenerator GetHelpPageSampleGenerator(this HttpConfiguration config)
         {
             return (HelpPageSampleGenerator)config.Properties.GetOrAdd(
                 typeof(HelpPageSampleGenerator),
@@ -219,7 +221,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         public static HelpPageApiModel GetHelpPageApiModel(this HttpConfiguration config, string apiDescriptionId)
         {
             object model;
-            string modelId = ApiModelPrefix + apiDescriptionId;
+            string modelId = API_MODEL_PREFIX + apiDescriptionId;
             if (!config.Properties.TryGetValue(modelId, out model))
             {
                 Collection<ApiDescription> apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;

@@ -1,11 +1,4 @@
-﻿using OmgPokedex.DataTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OmgPokedex.DataTypes.BasicImplementations
+﻿namespace OmgPokedex.DataTypes.BasicImplementations
 {
     public class Pokemon : IPokemon
     {

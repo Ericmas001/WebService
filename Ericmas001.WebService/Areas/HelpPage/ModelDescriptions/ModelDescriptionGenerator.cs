@@ -19,7 +19,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
     public class ModelDescriptionGenerator
     {
         // Modify this to support more data annotation attributes.
-        private readonly IDictionary<Type, Func<object, string>> AnnotationTextGenerator = new Dictionary<Type, Func<object, string>>
+        private readonly IDictionary<Type, Func<object, string>> m_AnnotationTextGenerator = new Dictionary<Type, Func<object, string>>
         {
             { typeof(RequiredAttribute), a => "Required" },
             { typeof(RangeAttribute), a =>
@@ -61,7 +61,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
         };
 
         // Modify this to add more default documentations.
-        private readonly IDictionary<Type, string> DefaultTypeDocumentation = new Dictionary<Type, string>
+        private readonly IDictionary<Type, string> m_DefaultTypeDocumentation = new Dictionary<Type, string>
         {
             { typeof(Int16), "integer" },
             { typeof(Int32), "integer" },
@@ -84,34 +84,28 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
             { typeof(Boolean), "boolean" },
         };
 
-        private Lazy<IModelDocumentationProvider> _documentationProvider;
+        private readonly Lazy<IModelDocumentationProvider> m_DocumentationProvider;
 
         public ModelDescriptionGenerator(HttpConfiguration config)
         {
             if (config == null)
             {
-                throw new ArgumentNullException("config");
+                throw new ArgumentNullException(nameof(config));
             }
 
-            _documentationProvider = new Lazy<IModelDocumentationProvider>(() => config.Services.GetDocumentationProvider() as IModelDocumentationProvider);
+            m_DocumentationProvider = new Lazy<IModelDocumentationProvider>(() => config.Services.GetDocumentationProvider() as IModelDocumentationProvider);
             GeneratedModels = new Dictionary<string, ModelDescription>(StringComparer.OrdinalIgnoreCase);
         }
 
-        public Dictionary<string, ModelDescription> GeneratedModels { get; private set; }
+        public Dictionary<string, ModelDescription> GeneratedModels { get; }
 
-        private IModelDocumentationProvider DocumentationProvider
-        {
-            get
-            {
-                return _documentationProvider.Value;
-            }
-        }
+        private IModelDocumentationProvider DocumentationProvider => m_DocumentationProvider.Value;
 
         public ModelDescription GetOrCreateModelDescription(Type modelType)
         {
             if (modelType == null)
             {
-                throw new ArgumentNullException("modelType");
+                throw new ArgumentNullException(nameof(modelType));
             }
 
             Type underlyingType = Nullable.GetUnderlyingType(modelType);
@@ -139,7 +133,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
                 return modelDescription;
             }
 
-            if (DefaultTypeDocumentation.ContainsKey(modelType))
+            if (m_DefaultTypeDocumentation.ContainsKey(modelType))
             {
                 return GenerateSimpleTypeModelDescription(modelType);
             }
@@ -205,7 +199,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
         private static string GetMemberName(MemberInfo member, bool hasDataContractAttribute)
         {
             JsonPropertyAttribute jsonProperty = member.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jsonProperty != null && !String.IsNullOrEmpty(jsonProperty.PropertyName))
+            if (!String.IsNullOrEmpty(jsonProperty?.PropertyName))
             {
                 return jsonProperty.PropertyName;
             }
@@ -213,7 +207,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
             if (hasDataContractAttribute)
             {
                 DataMemberAttribute dataMember = member.GetCustomAttribute<DataMemberAttribute>();
-                if (dataMember != null && !String.IsNullOrEmpty(dataMember.Name))
+                if (!String.IsNullOrEmpty(dataMember?.Name))
                 {
                     return dataMember.Name;
                 }
@@ -230,9 +224,9 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
             NonSerializedAttribute nonSerialized = member.GetCustomAttribute<NonSerializedAttribute>();
             ApiExplorerSettingsAttribute apiExplorerSetting = member.GetCustomAttribute<ApiExplorerSettingsAttribute>();
 
-            bool hasMemberAttribute = member.DeclaringType.IsEnum ?
+            bool hasMemberAttribute = member.DeclaringType != null && (member.DeclaringType.IsEnum ?
                 member.GetCustomAttribute<EnumMemberAttribute>() != null :
-                member.GetCustomAttribute<DataMemberAttribute>() != null;
+                member.GetCustomAttribute<DataMemberAttribute>() != null);
 
             // Display member only if all the followings are true:
             // no JsonIgnoreAttribute
@@ -252,7 +246,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
         private string CreateDefaultDocumentation(Type type)
         {
             string documentation;
-            if (DefaultTypeDocumentation.TryGetValue(type, out documentation))
+            if (m_DefaultTypeDocumentation.TryGetValue(type, out documentation))
             {
                 return documentation;
             }
@@ -272,7 +266,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.ModelDescriptions
             foreach (Attribute attribute in attributes)
             {
                 Func<object, string> textGenerator;
-                if (AnnotationTextGenerator.TryGetValue(attribute.GetType(), out textGenerator))
+                if (m_AnnotationTextGenerator.TryGetValue(attribute.GetType(), out textGenerator))
                 {
                     annotations.Add(
                         new ParameterAnnotation

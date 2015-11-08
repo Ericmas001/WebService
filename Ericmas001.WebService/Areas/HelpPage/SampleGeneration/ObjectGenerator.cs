@@ -6,15 +6,15 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Ericmas001.WebService.Areas.HelpPage
+namespace Ericmas001.WebService.Areas.HelpPage.SampleGeneration
 {
     /// <summary>
     /// This class will create an object of a given type and populate it with sample data.
     /// </summary>
     public class ObjectGenerator
     {
-        internal const int DefaultCollectionSize = 2;
-        private readonly SimpleTypeObjectGenerator SimpleObjectGenerator = new SimpleTypeObjectGenerator();
+        private const int DEFAULT_COLLECTION_SIZE = 2;
+        private readonly SimpleTypeObjectGenerator m_SimpleObjectGenerator = new SimpleTypeObjectGenerator();
 
         /// <summary>
         /// Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
@@ -42,44 +42,44 @@ namespace Ericmas001.WebService.Areas.HelpPage
             {
                 if (SimpleTypeObjectGenerator.CanGenerateObject(type))
                 {
-                    return SimpleObjectGenerator.GenerateObject(type);
+                    return m_SimpleObjectGenerator.GenerateObject(type);
                 }
 
                 if (type.IsArray)
                 {
-                    return GenerateArray(type, DefaultCollectionSize, createdObjectReferences);
+                    return GenerateArray(type, DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (type.IsGenericType)
                 {
-                    return GenerateGenericType(type, DefaultCollectionSize, createdObjectReferences);
+                    return GenerateGenericType(type, DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (type == typeof(IDictionary))
                 {
-                    return GenerateDictionary(typeof(Hashtable), DefaultCollectionSize, createdObjectReferences);
+                    return GenerateDictionary(typeof(Hashtable), DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (typeof(IDictionary).IsAssignableFrom(type))
                 {
-                    return GenerateDictionary(type, DefaultCollectionSize, createdObjectReferences);
+                    return GenerateDictionary(type, DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (type == typeof(IList) ||
                     type == typeof(IEnumerable) ||
                     type == typeof(ICollection))
                 {
-                    return GenerateCollection(typeof(ArrayList), DefaultCollectionSize, createdObjectReferences);
+                    return GenerateCollection(typeof(ArrayList), DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (typeof(IList).IsAssignableFrom(type))
                 {
-                    return GenerateCollection(type, DefaultCollectionSize, createdObjectReferences);
+                    return GenerateCollection(type, DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (type == typeof(IQueryable))
                 {
-                    return GenerateQueryable(type, DefaultCollectionSize, createdObjectReferences);
+                    return GenerateQueryable(type, DEFAULT_COLLECTION_SIZE, createdObjectReferences);
                 }
 
                 if (type.IsEnum)
@@ -258,11 +258,11 @@ namespace Ericmas001.WebService.Areas.HelpPage
                     return null;
                 }
 
-                bool containsKey = (bool)containsMethod.Invoke(result, new object[] { newKey });
+                bool containsKey = (bool)containsMethod.Invoke(result, new[] { newKey });
                 if (!containsKey)
                 {
                     object newValue = objectGenerator.GenerateObject(typeV, createdObjectReferences);
-                    addMethod.Invoke(result, new object[] { newKey, newValue });
+                    addMethod.Invoke(result, new[] { newKey, newValue });
                 }
             }
 
@@ -303,7 +303,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
                 return asQueryableMethod.Invoke(null, new[] { list });
             }
 
-            return Queryable.AsQueryable((IEnumerable)list);
+            return ((IEnumerable)list).AsQueryable();
         }
 
         private static object GenerateCollection(Type collectionType, int size, Dictionary<Type, object> createdObjectReferences)
@@ -318,7 +318,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
             for (int i = 0; i < size; i++)
             {
                 object element = objectGenerator.GenerateObject(type, createdObjectReferences);
-                addMethod.Invoke(result, new object[] { element });
+                addMethod.Invoke(result, new[] { element });
                 areAllElementsNull &= element == null;
             }
 
@@ -339,7 +339,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
 
         private static object GenerateComplexObject(Type type, Dictionary<Type, object> createdObjectReferences)
         {
-            object result = null;
+            object result;
 
             if (createdObjectReferences.TryGetValue(type, out result))
             {
@@ -395,8 +395,8 @@ namespace Ericmas001.WebService.Areas.HelpPage
 
         private class SimpleTypeObjectGenerator
         {
-            private long _index = 0;
-            private static readonly Dictionary<Type, Func<long, object>> DefaultGenerators = InitializeGenerators();
+            private long m_Index;
+            private static readonly Dictionary<Type, Func<long, object>> m_DefaultGenerators = InitializeGenerators();
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "These are simple type factories and cannot be split up.")]
             private static Dictionary<Type, Func<long, object>> InitializeGenerators()
@@ -410,46 +410,37 @@ namespace Ericmas001.WebService.Areas.HelpPage
                     { typeof(DateTimeOffset), index => new DateTimeOffset(DateTime.Now) },
                     { typeof(DBNull), index => DBNull.Value },
                     { typeof(Decimal), index => (Decimal)index },
-                    { typeof(Double), index => (Double)(index + 0.1) },
+                    { typeof(Double), index => index + 0.1 },
                     { typeof(Guid), index => Guid.NewGuid() },
                     { typeof(Int16), index => (Int16)(index % Int16.MaxValue) },
                     { typeof(Int32), index => (Int32)(index % Int32.MaxValue) },
-                    { typeof(Int64), index => (Int64)index },
+                    { typeof(Int64), index => index },
                     { typeof(Object), index => new object() },
                     { typeof(SByte), index => (SByte)64 },
                     { typeof(Single), index => (Single)(index + 0.1) },
                     { 
-                        typeof(String), index =>
-                        {
-                            return String.Format(CultureInfo.CurrentCulture, "sample string {0}", index);
-                        }
+                        typeof(String), index => String.Format(CultureInfo.CurrentCulture, "sample string {0}", index)
                     },
                     { 
-                        typeof(TimeSpan), index =>
-                        {
-                            return TimeSpan.FromTicks(1234567);
-                        }
+                        typeof(TimeSpan), index => TimeSpan.FromTicks(1234567)
                     },
                     { typeof(UInt16), index => (UInt16)(index % UInt16.MaxValue) },
                     { typeof(UInt32), index => (UInt32)(index % UInt32.MaxValue) },
                     { typeof(UInt64), index => (UInt64)index },
                     { 
-                        typeof(Uri), index =>
-                        {
-                            return new Uri(String.Format(CultureInfo.CurrentCulture, "http://webapihelppage{0}.com", index));
-                        }
+                        typeof(Uri), index => new Uri(String.Format(CultureInfo.CurrentCulture, "http://webapihelppage{0}.com", index))
                     },
                 };
             }
 
             public static bool CanGenerateObject(Type type)
             {
-                return DefaultGenerators.ContainsKey(type);
+                return m_DefaultGenerators.ContainsKey(type);
             }
 
             public object GenerateObject(Type type)
             {
-                return DefaultGenerators[type](++_index);
+                return m_DefaultGenerators[type](++m_Index);
             }
         }
     }

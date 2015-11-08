@@ -1,6 +1,6 @@
 using System;
 
-namespace Ericmas001.WebService.Areas.HelpPage
+namespace Ericmas001.WebService.Areas.HelpPage.SampleGeneration
 {
     /// <summary>
     /// This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
@@ -15,12 +15,12 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (src == null)
             {
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
             }
             Src = src;
         }
 
-        public string Src { get; private set; }
+        public string Src { get; }
 
         public override bool Equals(object obj)
         {

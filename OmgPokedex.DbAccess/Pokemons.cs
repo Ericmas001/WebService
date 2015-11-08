@@ -1,10 +1,6 @@
-﻿using OmgPokedex.DataTypes;
-using OmgPokedex.DataTypes.BasicImplementations;
-using System;
+﻿using OmgPokedex.DataTypes.BasicImplementations;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace OmgPokedex.DbAccess
 {

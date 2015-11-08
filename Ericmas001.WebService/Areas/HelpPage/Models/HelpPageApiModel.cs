@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
 using Ericmas001.WebService.Areas.HelpPage.ModelDescriptions;
@@ -45,13 +46,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Models
         /// <summary>
         /// Gets the request body parameter descriptions.
         /// </summary>
-        public IList<ParameterDescription> RequestBodyParameters
-        {
-            get
-            {
-                return GetParameterDescriptions(RequestModelDescription);
-            }
-        }
+        public IList<ParameterDescription> RequestBodyParameters => GetParameterDescriptions(RequestModelDescription);
 
         /// <summary>
         /// Gets or sets the <see cref="ModelDescription"/> that describes the resource.
@@ -61,13 +56,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Models
         /// <summary>
         /// Gets the resource property descriptions.
         /// </summary>
-        public IList<ParameterDescription> ResourceProperties
-        {
-            get
-            {
-                return GetParameterDescriptions(ResourceDescription);
-            }
-        }
+        public IList<ParameterDescription> ResourceProperties => GetParameterDescriptions(ResourceDescription);
 
         /// <summary>
         /// Gets the sample requests associated with the API.
@@ -82,6 +71,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Models
         /// <summary>
         /// Gets the error messages associated with this model.
         /// </summary>
+        [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
         public Collection<string> ErrorMessages { get; private set; }
 
         private static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
@@ -96,10 +86,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Models
             if (collectionModelDescription != null)
             {
                 complexTypeModelDescription = collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
-                if (complexTypeModelDescription != null)
-                {
-                    return complexTypeModelDescription.Properties;
-                }
+                return complexTypeModelDescription?.Properties;
             }
 
             return null;

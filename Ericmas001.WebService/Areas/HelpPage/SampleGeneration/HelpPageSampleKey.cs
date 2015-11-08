@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.Http.Headers;
 
-namespace Ericmas001.WebService.Areas.HelpPage
+namespace Ericmas001.WebService.Areas.HelpPage.SampleGeneration
 {
     /// <summary>
     /// This is used to identify the place where the sample should be applied.
@@ -18,7 +19,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(nameof(mediaType));
             }
 
             ActionName = String.Empty;
@@ -37,7 +38,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             ParameterType = type;
@@ -54,19 +55,19 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (!Enum.IsDefined(typeof(SampleDirection), sampleDirection))
             {
-                throw new InvalidEnumArgumentException("sampleDirection", (int)sampleDirection, typeof(SampleDirection));
+                throw new InvalidEnumArgumentException(nameof(sampleDirection), (int)sampleDirection, typeof(SampleDirection));
             }
             if (controllerName == null)
             {
-                throw new ArgumentNullException("controllerName");
+                throw new ArgumentNullException(nameof(controllerName));
             }
             if (actionName == null)
             {
-                throw new ArgumentNullException("actionName");
+                throw new ArgumentNullException(nameof(actionName));
             }
             if (parameterNames == null)
             {
-                throw new ArgumentNullException("parameterNames");
+                throw new ArgumentNullException(nameof(parameterNames));
             }
 
             ControllerName = controllerName;
@@ -88,7 +89,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(nameof(mediaType));
             }
 
             MediaType = mediaType;
@@ -100,7 +101,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         /// <value>
         /// The name of the controller.
         /// </value>
-        public string ControllerName { get; private set; }
+        public string ControllerName { get; }
 
         /// <summary>
         /// Gets the name of the action.
@@ -108,7 +109,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
         /// <value>
         /// The name of the action.
         /// </value>
-        public string ActionName { get; private set; }
+        public string ActionName { get; }
 
         /// <summary>
         /// Gets the media type.
@@ -116,19 +117,19 @@ namespace Ericmas001.WebService.Areas.HelpPage
         /// <value>
         /// The media type.
         /// </value>
-        public MediaTypeHeaderValue MediaType { get; private set; }
+        public MediaTypeHeaderValue MediaType { get; }
 
         /// <summary>
         /// Gets the parameter names.
         /// </summary>
-        public HashSet<string> ParameterNames { get; private set; }
+        public HashSet<string> ParameterNames { get; }
 
-        public Type ParameterType { get; private set; }
+        private Type ParameterType { get; }
 
         /// <summary>
         /// Gets the <see cref="SampleDirection"/>.
         /// </summary>
-        public SampleDirection? SampleDirection { get; private set; }
+        public SampleDirection? SampleDirection { get; }
 
         public override bool Equals(object obj)
         {
@@ -161,12 +162,8 @@ namespace Ericmas001.WebService.Areas.HelpPage
             {
                 hashCode ^= ParameterType.GetHashCode();
             }
-            foreach (string parameterName in ParameterNames)
-            {
-                hashCode ^= parameterName.ToUpperInvariant().GetHashCode();
-            }
 
-            return hashCode;
+            return ParameterNames.Aggregate(hashCode, (current, parameterName) => current ^ parameterName.ToUpperInvariant().GetHashCode());
         }
     }
 }

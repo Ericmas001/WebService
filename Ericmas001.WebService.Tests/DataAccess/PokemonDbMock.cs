@@ -1,16 +1,13 @@
 ﻿using Ericmas001.WebService.DataAccess;
 using OmgPokedex.DataTypes;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ericmas001.WebService.Tests.DataAccess
 {
     class PokemonDbMock : IPokemonDb
     {
-        IEnumerable<IPokemon> m_Pokemons;
+        readonly IEnumerable<IPokemon> m_Pokemons;
         public PokemonDbMock(IEnumerable<IPokemon> pokemons)
         {
             m_Pokemons = pokemons;

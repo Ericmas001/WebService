@@ -1,6 +1,6 @@
 using System;
 
-namespace Ericmas001.WebService.Areas.HelpPage
+namespace Ericmas001.WebService.Areas.HelpPage.SampleGeneration
 {
     /// <summary>
     /// This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
@@ -11,12 +11,12 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (errorMessage == null)
             {
-                throw new ArgumentNullException("errorMessage");
+                throw new ArgumentNullException(nameof(errorMessage));
             }
             ErrorMessage = errorMessage;
         }
 
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get; }
 
         public override bool Equals(object obj)
         {

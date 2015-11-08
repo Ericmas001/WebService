@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -12,14 +13,15 @@ namespace Ericmas001.WebService.Areas.HelpPage
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class XmlDocumentationProvider : IDocumentationProvider, IModelDocumentationProvider
     {
-        private XPathNavigator _documentNavigator;
-        private const string TypeExpression = "/doc/members/member[@name='T:{0}']";
-        private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
-        private const string PropertyExpression = "/doc/members/member[@name='P:{0}']";
-        private const string FieldExpression = "/doc/members/member[@name='F:{0}']";
-        private const string ParameterExpression = "param[@name='{0}']";
+        private readonly XPathNavigator m_DocumentNavigator;
+        private const string TYPE_EXPRESSION = "/doc/members/member[@name='T:{0}']";
+        private const string METHOD_EXPRESSION = "/doc/members/member[@name='M:{0}']";
+        private const string PROPERTY_EXPRESSION = "/doc/members/member[@name='P:{0}']";
+        private const string FIELD_EXPRESSION = "/doc/members/member[@name='F:{0}']";
+        private const string PARAMETER_EXPRESSION = "param[@name='{0}']";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
@@ -29,10 +31,10 @@ namespace Ericmas001.WebService.Areas.HelpPage
         {
             if (documentPath == null)
             {
-                throw new ArgumentNullException("documentPath");
+                throw new ArgumentNullException(nameof(documentPath));
             }
             XPathDocument xpath = new XPathDocument(documentPath);
-            _documentNavigator = xpath.CreateNavigator();
+            m_DocumentNavigator = xpath.CreateNavigator();
         }
 
         public string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
@@ -56,11 +58,8 @@ namespace Ericmas001.WebService.Areas.HelpPage
                 if (methodNode != null)
                 {
                     string parameterName = reflectedParameterDescriptor.ParameterInfo.Name;
-                    XPathNavigator parameterNode = methodNode.SelectSingleNode(String.Format(CultureInfo.InvariantCulture, ParameterExpression, parameterName));
-                    if (parameterNode != null)
-                    {
-                        return parameterNode.Value.Trim();
-                    }
+                    XPathNavigator parameterNode = methodNode.SelectSingleNode(String.Format(CultureInfo.InvariantCulture, PARAMETER_EXPRESSION, parameterName));
+                    return parameterNode?.Value.Trim();
                 }
             }
 
@@ -76,9 +75,9 @@ namespace Ericmas001.WebService.Areas.HelpPage
         public string GetDocumentation(MemberInfo member)
         {
             string memberName = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(member.DeclaringType), member.Name);
-            string expression = member.MemberType == MemberTypes.Field ? FieldExpression : PropertyExpression;
+            string expression = member.MemberType == MemberTypes.Field ? FIELD_EXPRESSION : PROPERTY_EXPRESSION;
             string selectExpression = String.Format(CultureInfo.InvariantCulture, expression, memberName);
-            XPathNavigator propertyNode = _documentNavigator.SelectSingleNode(selectExpression);
+            XPathNavigator propertyNode = m_DocumentNavigator.SelectSingleNode(selectExpression);
             return GetTagValue(propertyNode, "summary");
         }
 
@@ -93,8 +92,8 @@ namespace Ericmas001.WebService.Areas.HelpPage
             ReflectedHttpActionDescriptor reflectedActionDescriptor = actionDescriptor as ReflectedHttpActionDescriptor;
             if (reflectedActionDescriptor != null)
             {
-                string selectExpression = String.Format(CultureInfo.InvariantCulture, MethodExpression, GetMemberName(reflectedActionDescriptor.MethodInfo));
-                return _documentNavigator.SelectSingleNode(selectExpression);
+                string selectExpression = String.Format(CultureInfo.InvariantCulture, METHOD_EXPRESSION, GetMemberName(reflectedActionDescriptor.MethodInfo));
+                return m_DocumentNavigator.SelectSingleNode(selectExpression);
             }
 
             return null;
@@ -115,23 +114,15 @@ namespace Ericmas001.WebService.Areas.HelpPage
 
         private static string GetTagValue(XPathNavigator parentNode, string tagName)
         {
-            if (parentNode != null)
-            {
-                XPathNavigator node = parentNode.SelectSingleNode(tagName);
-                if (node != null)
-                {
-                    return node.Value.Trim();
-                }
-            }
-
-            return null;
+            XPathNavigator node = parentNode?.SelectSingleNode(tagName);
+            return node?.Value.Trim();
         }
 
         private XPathNavigator GetTypeNode(Type type)
         {
             string controllerTypeName = GetTypeName(type);
-            string selectExpression = String.Format(CultureInfo.InvariantCulture, TypeExpression, controllerTypeName);
-            return _documentNavigator.SelectSingleNode(selectExpression);
+            string selectExpression = String.Format(CultureInfo.InvariantCulture, TYPE_EXPRESSION, controllerTypeName);
+            return m_DocumentNavigator.SelectSingleNode(selectExpression);
         }
 
         private static string GetTypeName(Type type)
@@ -146,7 +137,7 @@ namespace Ericmas001.WebService.Areas.HelpPage
 
                 // Trim the generic parameter counts from the name
                 genericTypeName = genericTypeName.Substring(0, genericTypeName.IndexOf('`'));
-                string[] argumentTypeNames = genericArguments.Select(t => GetTypeName(t)).ToArray();
+                string[] argumentTypeNames = genericArguments.Select(GetTypeName).ToArray();
                 name = String.Format(CultureInfo.InvariantCulture, "{0}{{{1}}}", genericTypeName, String.Join(",", argumentTypeNames));
             }
             if (type.IsNested)

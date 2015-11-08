@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Http;
-using static System.String;
 using Ericmas001.WebService.DataAccess;
-using System.Linq;
 using OmgPokedex.DataTypes;
-using OmgPokedex.DbAccess;
 using OmgPokedex.DataTypes.BasicImplementations;
 
 namespace Ericmas001.WebService.Controllers
 {
     public class PokemonsController : ApiController
     {
-        IPokemonDb m_Database;
+        readonly IPokemonDb m_Database;
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public PokemonsController() : this(new PokemonDatabase())
         {
 
         }
-        public PokemonsController(IPokemonDb db) : base()
+        public PokemonsController(IPokemonDb db)
         {
             m_Database = db;
         }

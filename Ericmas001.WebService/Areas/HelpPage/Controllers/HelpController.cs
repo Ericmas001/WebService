@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Http;
 using System.Web.Mvc;
 using Ericmas001.WebService.Areas.HelpPage.ModelDescriptions;
@@ -11,19 +12,20 @@ namespace Ericmas001.WebService.Areas.HelpPage.Controllers
     /// </summary>
     public class HelpController : Controller
     {
-        private const string ErrorViewName = "Error";
+        private const string ERROR_VIEW_NAME = "Error";
 
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public HelpController()
             : this(GlobalConfiguration.Configuration)
         {
         }
 
-        public HelpController(HttpConfiguration config)
+        private HelpController(HttpConfiguration config)
         {
             Configuration = config;
         }
 
-        public HttpConfiguration Configuration { get; private set; }
+        private HttpConfiguration Configuration { get; }
 
         public ActionResult Index()
         {
@@ -42,7 +44,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Controllers
                 }
             }
 
-            return View(ErrorViewName);
+            return View(ERROR_VIEW_NAME);
         }
 
         public ActionResult ResourceModel(string modelName)
@@ -57,7 +59,7 @@ namespace Ericmas001.WebService.Areas.HelpPage.Controllers
                 }
             }
 
-            return View(ErrorViewName);
+            return View(ERROR_VIEW_NAME);
         }
     }
 }
